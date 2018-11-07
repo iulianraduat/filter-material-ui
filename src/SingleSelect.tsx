@@ -4,13 +4,23 @@ import { SingleSelect } from "react-select-material-ui";
 
 class SingleSelectField extends React.Component<SingleSelectFieldProps> {
   public render() {
-    const { label, options, value } = this.props;
+    const {
+      label,
+      noOptionsAvailable,
+      noOptionsMatchFilter,
+      options,
+      value
+    } = this.props;
 
     return (
       <SingleSelect
         label={label}
         onChange={this.handleChange}
         options={options}
+        SelectProps={{
+          msgNoOptionsAvailable: noOptionsAvailable,
+          msgNoOptionsMatchFilter: noOptionsMatchFilter
+        }}
         value={value}
       />
     );
@@ -26,6 +36,8 @@ class SingleSelectField extends React.Component<SingleSelectFieldProps> {
 interface SingleSelectFieldProps {
   label: string;
   name: string;
+  noOptionsAvailable?: string;
+  noOptionsMatchFilter?: string;
   onChange: (field: string, value: string) => void;
   options: string[];
   value?: string;

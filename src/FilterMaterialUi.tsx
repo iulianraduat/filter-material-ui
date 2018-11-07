@@ -70,6 +70,8 @@ export interface FilterField {
   options?: string[];
   text: {
     all: string;
+    noOptionsAvailable?: string;
+    noOptionsMatchFilter?: string;
     plural: string;
     singular: string;
   };

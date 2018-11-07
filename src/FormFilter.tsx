@@ -105,7 +105,8 @@ class FormFilter extends React.Component<FormFilterProps, FormFilterState> {
   };
 
   private renderFieldByType = (field: FilterField) => {
-    const { label, name, options } = field;
+    const { label, name, options, text } = field;
+    const { noOptionsAvailable, noOptionsMatchFilter } = text;
     const { data } = this.state;
     const value: string | string[] | undefined = data[name];
 
@@ -124,8 +125,10 @@ class FormFilter extends React.Component<FormFilterProps, FormFilterState> {
           <ColorsSelectField
             label={label}
             name={name}
-            options={options || []}
+            noOptionsAvailable={noOptionsAvailable}
+            noOptionsMatchFilter={noOptionsMatchFilter}
             onChange={this.handleChange}
+            options={options || []}
             values={value as string[]}
           />
         );
@@ -134,8 +137,10 @@ class FormFilter extends React.Component<FormFilterProps, FormFilterState> {
           <MultipleSelectField
             label={label}
             name={name}
-            options={options || []}
+            noOptionsAvailable={noOptionsAvailable}
+            noOptionsMatchFilter={noOptionsMatchFilter}
             onChange={this.handleChange}
+            options={options || []}
             values={value as string[]}
           />
         );
@@ -144,8 +149,10 @@ class FormFilter extends React.Component<FormFilterProps, FormFilterState> {
           <SingleSelectField
             label={label}
             name={name}
-            options={options || []}
+            noOptionsAvailable={noOptionsAvailable}
+            noOptionsMatchFilter={noOptionsMatchFilter}
             onChange={this.handleChange}
+            options={options || []}
             value={value as string}
           />
         );

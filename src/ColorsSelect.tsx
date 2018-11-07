@@ -5,7 +5,13 @@ import { isEmpty } from "lodash";
 
 class ColorsSelectField extends React.Component<ColorsSelectFieldProps> {
   public render() {
-    const { label, options, values } = this.props;
+    const {
+      label,
+      noOptionsAvailable,
+      noOptionsMatchFilter,
+      options,
+      values
+    } = this.props;
 
     if (isEmpty(values) === false) {
       (values as string[]).sort();
@@ -16,6 +22,10 @@ class ColorsSelectField extends React.Component<ColorsSelectFieldProps> {
         label={label}
         onChange={this.handleChange}
         options={options}
+        SelectProps={{
+          msgNoOptionsAvailable: noOptionsAvailable,
+          msgNoOptionsMatchFilter: noOptionsMatchFilter
+        }}
         values={values}
       />
     );
@@ -32,6 +42,8 @@ class ColorsSelectField extends React.Component<ColorsSelectFieldProps> {
 interface ColorsSelectFieldProps {
   label: string;
   name: string;
+  noOptionsAvailable?: string;
+  noOptionsMatchFilter?: string;
   onChange: (field: string, value: string[]) => void;
   options: string[];
   values?: string[];

@@ -31,11 +31,13 @@ The component accepts the props defined bellow in the table.
 
 ### Fields defined by TEXT
 
-| Name     | Type   | Required | Description                                                   |
-| -------- | ------ | -------- | ------------------------------------------------------------- |
-| all      | string | yes      | The text displayed when there is no value selected            |
-| plural   | string | yes      | The text displayed when there is one value selected           |
-| singular | string | yes      | The text displayed when there is more then one value selected |
+| Name                 | Type   | Required | Description                                                      |
+| -------------------- | ------ | -------- | ---------------------------------------------------------------- |
+| all                  | string | yes      | The text displayed when there is no value selected               |
+| noOptionsAvailable   | string | no       | The text when there are no longer options selectable             |
+| noOptionsMatchFilter | string | no       | The text when there are no options matching the filter in select |
+| plural               | string | yes      | The text displayed when there is one value selected              |
+| singular             | string | yes      | The text displayed when there is more then one value selected    |
 
 ### Values valid for type
 
@@ -167,3 +169,7 @@ export default App;
 ### 1.0.0
 
 - filter-material-ui is made publicly available
+
+### 1.0.1
+
+- added texts for select fields for the case when there are no longer selectable options or no option matches the filter in select
