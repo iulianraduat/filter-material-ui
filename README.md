@@ -170,6 +170,6 @@ export default App;
 
 - filter-material-ui is made publicly available
 
-### 1.0.1
+### 1.0.2
 
 - added texts for select fields for the case when there are no longer selectable options or no option matches the filter in select
