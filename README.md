@@ -173,3 +173,7 @@ export default App;
 ### 1.0.2
 
 - added texts for select fields for the case when there are no longer selectable options or no option matches the filter in select
+
+### 1.0.3
+
+- made the icon fo edit button scale with the text
