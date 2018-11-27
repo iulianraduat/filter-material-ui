@@ -24,7 +24,7 @@ const styles: Dictionary<React.CSSProperties> = {
 	}
 };
 
-class TextFilter extends React.Component<TextFilterProps> {
+class TextFilter extends React.PureComponent<TextFilterProps> {
 	public render() {
 		const { textPrefix, textSuffix } = this.props;
 

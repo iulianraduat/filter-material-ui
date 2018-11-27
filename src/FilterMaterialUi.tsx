@@ -1,88 +1,74 @@
-import * as React from "react";
+import * as React from 'react';
 
-import TextFilter from "./TextFilter";
-import FormFilter from "./FormFilter";
-import { Dictionary } from "lodash";
+import { Dictionary } from 'lodash';
 
-// TODO
-// implement the isValid for input
-// allow to define the md, sm, xs numbers
-class FilterMaterialUi extends React.Component<
-  FilterMaterialUiProps,
-  FilterMaterialUiState
-> {
-  public state: FilterMaterialUiState = {
-    isTextVisible: true
-  };
+import TextFilter from './TextFilter';
+import FormFilter from './FormFilter';
 
-  public render() {
-    const { onChange, textPrefix, textSuffix, ...rest } = this.props;
-    const { isTextVisible } = this.state;
+class FilterMaterialUi extends React.PureComponent<FilterMaterialUiProps, FilterMaterialUiState> {
+	public state: FilterMaterialUiState = {
+		isTextVisible: true
+	};
 
-    return isTextVisible ? (
-      <TextFilter
-        {...rest}
-        textPrefix={textPrefix}
-        textSuffix={textSuffix}
-        onEdit={this.handleEdit}
-      />
-    ) : (
-      <FormFilter
-        {...rest}
-        onCancel={this.handleShowText}
-        onChange={this.handleChange}
-      />
-    );
-  }
+	public render() {
+		const { onChange, textPrefix, textSuffix, ...rest } = this.props;
+		const { isTextVisible } = this.state;
 
-  private handleEdit = () =>
-    this.setState({
-      isTextVisible: false
-    });
+		return isTextVisible ? (
+			<TextFilter {...rest} textPrefix={textPrefix} textSuffix={textSuffix} onEdit={this.handleEdit} />
+		) : (
+			<FormFilter {...rest} onCancel={this.handleShowText} onChange={this.handleChange} />
+		);
+	}
 
-  private handleChange = (data: Dictionary<string | string[]>) => {
-    this.props.onChange(data);
-    this.handleShowText();
-  };
+	private handleEdit = () =>
+		this.setState({
+			isTextVisible: false
+		});
 
-  private handleShowText = () =>
-    this.setState({
-      isTextVisible: true
-    });
+	private handleChange = (data: Dictionary<string | string[]>) => {
+		this.props.onChange(data);
+		this.handleShowText();
+	};
+
+	private handleShowText = () =>
+		this.setState({
+			isTextVisible: true
+		});
 }
 
 interface FilterMaterialUiState {
-  isTextVisible: boolean;
+	isTextVisible: boolean;
 }
 
 export interface FilterMaterialUiProps {
-  id?: string;
-  fields: FilterField[];
-  data?: Dictionary<string | string[]>;
-  onChange: (data: Dictionary<string | string[]>) => void;
-  textPrefix?: string;
-  textSuffix?: string;
+	id?: string;
+	fields: FilterField[];
+	data?: Dictionary<string | string[]>;
+	onChange: (data: Dictionary<string | string[]>) => void;
+	textPrefix?: string;
+	textSuffix?: string;
 }
 
 export interface FilterField {
-  label: string;
-  name: string;
-  options?: string[];
-  text: {
-    all: string;
-    noOptionsAvailable?: string;
-    noOptionsMatchFilter?: string;
-    plural: string;
-    singular: string;
-  };
-  type: TYPE;
+	label: string;
+	name: string;
+	options?: string[];
+	text: {
+		all: string;
+		noOptionsAvailable?: string;
+		noOptionsMatchFilter?: string;
+		plural: string;
+		singular: string;
+	};
+	type: TYPE;
 }
 
 export enum TYPE {
-  INPUT,
-  SINGLE_SELECT,
-  MULTIPLE_SELECT,
-  COLORS_SELECT
+	INPUT,
+	SINGLE_SELECT,
+	MULTIPLE_SELECT,
+	COLORS_SELECT
 }
 
 export default FilterMaterialUi;

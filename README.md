@@ -177,3 +177,7 @@ export default App;
 ### 1.0.3
 
 - made the icon fo edit button scale with the text
+
+### 1.0.4
+
+- reduced number of re-renders
