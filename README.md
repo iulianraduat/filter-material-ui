@@ -55,6 +55,7 @@ The component accepts the props defined bellow in the table.
 | FilterMaterialUi _uses_ | Material-ui | React  |
 | ----------------------: | :---------: | :----: |
 |                   1.0.x |    3.2.0    | 16.5.2 |
+|                   1.1.x |    3.6.0    | 16.6.3 |
 
 ### About versioning schema used for FilterMaterialUi
 
@@ -172,12 +173,16 @@ export default App;
 
 ### 1.0.2
 
-- added texts for select fields for the case when there are no longer selectable options or no option matches the filter in select
+- Added texts for select fields for the case when there are no longer selectable options or no option matches the filter in select
 
 ### 1.0.3
 
-- made the icon fo edit button scale with the text
+- Made the icon fo edit button scale with the text
 
 ### 1.0.4
 
-- reduced number of re-renders
+- Reduced number of re-renders
+
+### 1.1.0
+
+- Updated the react and material-ui packages
