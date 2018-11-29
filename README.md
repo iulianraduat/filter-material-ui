@@ -186,3 +186,7 @@ export default App;
 ### 1.1.0
 
 - Updated the react and material-ui packages
+
+### 1.1.1
+
+- Fixed the line height when the text is wrapped
