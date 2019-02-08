@@ -56,10 +56,11 @@ The component accepts the props defined bellow in the table.
 | ----------------------: | :---------: | :----: |
 |                   1.0.x |    3.2.0    | 16.5.2 |
 |                   1.1.x |    3.6.0    | 16.6.3 |
+|                   1.2.x |    3.9.2    | 16.8.1 |
 
 ### About versioning schema used for FilterMaterialUi
 
-- Major - it will be increased if the major version of material-ui changes or there are breaking changes in the code of FilterMaterialUi
+- Major - it will be increased if the major version of the dependat package changes or there are breaking changes in the code of FilterMaterialUi
 - Minor - it will be increased if no major version of the dependat package changes, but there are changes of the minor or patch versions of it
 - Patch - it will be increased if there are no changes of the dependat packages, but there are non breaking changes in the code of FilterMaterialUi
 
@@ -190,3 +191,7 @@ export default App;
 ### 1.1.1
 
 - Fixed the line height when the text is wrapped
+
+### 1.2.0
+
+- Update packages
