@@ -200,3 +200,8 @@ export default App;
 ### 1.3.0
 
 - Update packages
+
+### 1.3.1
+
+- Update packages
+- Fixed display of the pencil button at different font sizes
