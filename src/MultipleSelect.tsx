@@ -1,17 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
+import { isEmpty } from 'lodash';
+import { MultipleSelect } from 'react-select-material-ui';
 
-import { MultipleSelect } from "react-select-material-ui";
-import { isEmpty } from "lodash";
 
 class MultipleSelectField extends React.Component<MultipleSelectFieldProps> {
   public render() {
-    const {
-      label,
-      noOptionsAvailable,
-      noOptionsMatchFilter,
-      options,
-      values
-    } = this.props;
+    const { label, noOptionsAvailable, noOptionsMatchFilter, options, values } = this.props;
 
     if (isEmpty(values) === false) {
       (values as string[]).sort();
@@ -26,7 +20,7 @@ class MultipleSelectField extends React.Component<MultipleSelectFieldProps> {
           msgNoOptionsAvailable: noOptionsAvailable,
           msgNoOptionsMatchFilter: noOptionsMatchFilter
         }}
-        values={values}
+        defaultValues={values}
       />
     );
   }

@@ -4,6 +4,10 @@ A material-ui component which allows to edit a user defined set of fields repres
 
 ---
 
+## Demo
+
+You can access the storybook for this component [here](https://iulian-radu-at.github.io/filter-material-ui/).
+
 ## Props
 
 The component accepts the props defined bellow in the table.
@@ -14,8 +18,8 @@ The component accepts the props defined bellow in the table.
 |------------|----------------------------|--------------------|-----------|---------------------------------------------------------|
 | id         | string                     | no                 | undefined | The id of the field                                     |
 | fields     | FilterField[]              | yes                | -         | The fields of the filter                                |
-| data       | Dictionary<string \        | string[]>          | no        | {}|The initial values for the filter's fields           |
-| onChange   | (data: Dictionary<string \ | string[]>) => void | yes       | -|The callback function called when the data is changed |
+| data       | Dictionary<string \| string[]>          | no        | {}|The initial values for the filter's fields           |
+| onChange   | (data: Dictionary<string \| string[]>) => void | yes       | -|The callback function called when the data is changed |
 | textPrefix | string                     | no                 | ""        | The text displayed before the fields in text mode       |
 | textSuffix | string                     | no                 | ""        | The text displayed after the fields in text mode        |
 
@@ -76,64 +80,63 @@ The base component which allows to create read-only or creatable select componen
 import * as React from "react";
 
 import FilterMaterialUi, { FilterField, TYPE } from "filter-material-ui";
-import { Dictionary } from "lodash";
 
 class App extends React.Component<any, AppState> {
   public state: AppState = {
     data: {
       name: "Green-Field",
-      tags: "Open-Source",
+      categories: "Open-Source",
       colors: ["red", "yellow"]
     }
   };
 
-  public render() {
-    const fields: FilterField[] = [
-      {
-        label: "App types",
-        name: "types",
-        options: ["JS", "JAVA", "C#"],
-        text: {
-          all: "of any type",
-          singular: "having the type",
-          plural: "having the types"
-        },
-        type: TYPE.MULTIPLE_SELECT
+  private fields: FilterField[] = [
+    {
+      label: "App types",
+      name: "types",
+      options: ["JS", "JAVA", "C#"],
+      text: {
+        all: "of any type",
+        singular: "having the type",
+        plural: "having the types"
       },
-      {
-        label: "Name",
-        name: "name",
-        text: {
-          all: "having any name",
-          singular: "having names containing",
-          plural: "having names containing"
-        },
-        type: TYPE.INPUT
+      type: TYPE.MULTIPLE_SELECT
+    },
+    {
+      label: "Name",
+      name: "name",
+      text: {
+        all: "having any name",
+        singular: "having names containing",
+        plural: "having names containing"
       },
-      {
-        label: "Category",
-        name: "tags",
-        options: ["Open-Source", "Commercial", "Educational"],
-        text: {
-          all: "ignoring categories",
-          singular: "having the category",
-          plural: "having the categories"
-        },
-        type: TYPE.SINGLE_SELECT
+      type: TYPE.INPUT
+    },
+    {
+      label: "Category",
+      name: "categories",
+      options: ["Open-Source", "Commercial", "Educational"],
+      text: {
+        all: "ignoring categories",
+        singular: "having the category",
+        plural: "having the categories"
       },
-      {
-        label: "Colors",
-        name: "colors",
-        options: ["red", "green", "blue", "white", "black", "gray", "yellow"],
-        text: {
-          all: "ignoring colors",
-          singular: "having the color",
-          plural: "having the colors"
-        },
-        type: TYPE.COLORS_SELECT
-      }
-    ];
+      type: TYPE.SINGLE_SELECT
+    },
+    {
+      label: "Colors",
+      name: "colors",
+      options: ["red", "green", "blue", "white", "black", "gray", "yellow"],
+      text: {
+        all: "ignoring colors",
+        singular: "having the color",
+        plural: "having the colors"
+      },
+      type: TYPE.COLORS_SELECT
+    }
+  ];
 
+  public render() {
     return (
       <div className="App">
         <h3>App</h3>
@@ -148,7 +151,7 @@ class App extends React.Component<any, AppState> {
     );
   }
 
-  private handleChange = (data: Dictionary<string | string[]>) => {
+  private handleChange = (data: Dictionary) => {
     console.log({
       data
     });
@@ -160,7 +163,11 @@ class App extends React.Component<any, AppState> {
 }
 
 interface AppState {
-  data: Dictionary<string | string[]>;
+  data: Dictionary;
+}
+
+interface Dictionary {
+  [key: string]: string | string[];
 }
 
 export default App;
@@ -196,17 +203,23 @@ export default App;
 
 ### 1.2.0
 
-- Update packages
+- Updated packages
 
 ### 1.3.0
 
-- Update packages
+- Updated packages
 
 ### 1.3.1
 
-- Update packages
+- Updated packages
 - Fixed display of the pencil button at different font sizes
 
 ### 2.0.0
 
-- Update packages
+- Updated packages
+
+### 2.0.1
+
+- Fixed the selects to use defaultValue(s) instead of value(s)
+- Added a storybook for this component
+- Updated packages
