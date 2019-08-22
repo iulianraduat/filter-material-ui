@@ -64,6 +64,7 @@ The component accepts the props defined bellow in the table.
 |                   1.3.x |    3.9.3    | 16.8.6 |
 |                   2.0.x |    4.0.2    | 16.8.6 |
 |                   2.1.x |    4.2.0    | 16.8.6 |
+|                   2.2.x |    4.3.3    | 16.9.0 |
 
 ### About versioning schema used for FilterMaterialUi
 
@@ -226,5 +227,9 @@ export default App;
 - Updated packages
 
 ### 2.1.0
+
+- Updated packages
+
+### 2.2.0
 
 - Updated packages
