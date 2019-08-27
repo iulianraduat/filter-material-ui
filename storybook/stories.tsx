@@ -9,10 +9,12 @@ const style: React.CSSProperties = {
 const showSelectedValue = (id: string) => (values: Dictionary) =>
   (document.getElementById(id).textContent = JSON.stringify(values, undefined, 2));
 
-storiesOf('FilterMaterialUi', module).add('an example', () => (
-  <div>
-    <Example onChange={showSelectedValue('f')} />
-    <div style={style} />
-    Selected values: <span id="f" />
-  </div>
-));
+storiesOf('FilterMaterialUi', module)
+  .addParameters({ options: { showPanel: false } })
+  .add('an example', () => (
+    <div>
+      <Example onChange={showSelectedValue('f')} />
+      <div style={style} />
+      Selected values: <span id="f" />
+    </div>
+  ));
