@@ -12,167 +12,166 @@ import CancelButton from './CancelButton';
 import ApplyButton from './ApplyButton';
 
 const styles: Dictionary<React.CSSProperties> = {
-	button: {
-		margin: 10
-	},
-	buttons: {
-		textAlign: 'center'
-	},
-	container: {
-		width: '100%'
-	},
-	grid: {
-		alignItems: 'flex-end'
-		//    ,justifyContent: "center"
-	},
-	item: {
-		padding: 10
-	}
+  button: {
+    margin: 10
+  },
+  buttons: {
+    textAlign: 'center'
+  },
+  container: {
+    width: '100%'
+  },
+  grid: {
+    alignItems: 'flex-end'
+  },
+  item: {
+    padding: 10
+  }
 };
 
 class FormFilter extends React.PureComponent<FormFilterProps, FormFilterState> {
-	constructor(props: FormFilterProps) {
-		super(props);
+  constructor(props: FormFilterProps) {
+    super(props);
 
-		this.state = {
-			data: props.data || {}
-		};
-	}
+    this.state = {
+      data: props.data || {}
+    };
+  }
 
-	public render() {
-		return (
-			<div style={styles.container}>
-				<Grid container={true} style={styles.grid}>
-					{this.renderFields()}
-				</Grid>
-				<div style={styles.buttons}>
-					<CancelButton onCancel={this.props.onCancel} style={styles.button} />
-					<ApplyButton onApply={this.handleApply} style={styles.button} />
-				</div>
-			</div>
-		);
-	}
+  public render() {
+    return (
+      <div style={styles.container}>
+        <Grid container={true} style={styles.grid}>
+          {this.renderFields()}
+        </Grid>
+        <div style={styles.buttons}>
+          <CancelButton onCancel={this.props.onCancel} style={styles.button} />
+          <ApplyButton onApply={this.handleApply} style={styles.button} />
+        </div>
+      </div>
+    );
+  }
 
-	private renderFields = () => map(this.props.fields, this.renderField);
+  private renderFields = () => map(this.props.fields, this.renderField);
 
-	private renderField = (field: FilterField) => {
-		const { md, sm, xs } = this.getColWidth();
+  private renderField = (field: FilterField) => {
+    const { md, sm, xs } = this.getColWidth();
 
-		return (
-			<Grid
-				item={true}
-				key={field.name}
-				md={md as GridSize}
-				sm={sm as GridSize}
-				style={styles.item}
-				xs={xs as GridSize}
-			>
-				{this.renderFieldByType(field)}
-			</Grid>
-		);
-	};
+    return (
+      <Grid
+        item={true}
+        key={field.name}
+        md={md as GridSize}
+        sm={sm as GridSize}
+        style={styles.item}
+        xs={xs as GridSize}
+      >
+        {this.renderFieldByType(field)}
+      </Grid>
+    );
+  };
 
-	private getColWidth = () => {
-		const numFields: number = size(this.props.fields);
+  private getColWidth = () => {
+    const numFields: number = size(this.props.fields);
 
-		switch (numFields) {
-			case 1:
-				return {
-					md: 12,
-					sm: 12,
-					xs: 12
-				};
-			case 2:
-				return {
-					md: 6,
-					sm: 6,
-					xs: 12
-				};
-			case 3:
-				return {
-					md: 4,
-					sm: 6,
-					xs: 12
-				};
-			default:
-				return {
-					md: 3,
-					sm: 6,
-					xs: 12
-				};
-		}
-	};
+    switch (numFields) {
+      case 1:
+        return {
+          md: 12,
+          sm: 12,
+          xs: 12
+        };
+      case 2:
+        return {
+          md: 6,
+          sm: 6,
+          xs: 12
+        };
+      case 3:
+        return {
+          md: 4,
+          sm: 6,
+          xs: 12
+        };
+      default:
+        return {
+          md: 3,
+          sm: 6,
+          xs: 12
+        };
+    }
+  };
 
-	private renderFieldByType = (field: FilterField) => {
-		const { label, name, options, text } = field;
-		const { noOptionsAvailable, noOptionsMatchFilter } = text;
-		const { data } = this.state;
-		const value: string | string[] | undefined = data[name];
+  private renderFieldByType = (field: FilterField) => {
+    const { label, name, options, text } = field;
+    const { noOptionsAvailable, noOptionsMatchFilter } = text;
+    const { data } = this.state;
+    const value: string | string[] | undefined = data[name];
 
-		switch (field.type) {
-			case TYPE.INPUT:
-				return <InputField label={label} name={name} onChange={this.handleChange} value={value as string} />;
-			case TYPE.COLORS_SELECT:
-				return (
-					<ColorsSelectField
-						label={label}
-						name={name}
-						noOptionsAvailable={noOptionsAvailable}
-						noOptionsMatchFilter={noOptionsMatchFilter}
-						onChange={this.handleChange}
-						options={options || []}
-						values={value as string[]}
-					/>
-				);
-			case TYPE.MULTIPLE_SELECT:
-				return (
-					<MultipleSelectField
-						label={label}
-						name={name}
-						noOptionsAvailable={noOptionsAvailable}
-						noOptionsMatchFilter={noOptionsMatchFilter}
-						onChange={this.handleChange}
-						options={options || []}
-						values={value as string[]}
-					/>
-				);
-			case TYPE.SINGLE_SELECT:
-				return (
-					<SingleSelectField
-						label={label}
-						name={name}
-						noOptionsAvailable={noOptionsAvailable}
-						noOptionsMatchFilter={noOptionsMatchFilter}
-						onChange={this.handleChange}
-						options={options || []}
-						value={value as string}
-					/>
-				);
-		}
-	};
+    switch (field.type) {
+      case TYPE.INPUT:
+        return <InputField label={label} name={name} onChange={this.handleChange} value={value as string} />;
+      case TYPE.COLORS_SELECT:
+        return (
+          <ColorsSelectField
+            label={label}
+            name={name}
+            noOptionsAvailable={noOptionsAvailable}
+            noOptionsMatchFilter={noOptionsMatchFilter}
+            onChange={this.handleChange}
+            options={options || []}
+            values={value as string[]}
+          />
+        );
+      case TYPE.MULTIPLE_SELECT:
+        return (
+          <MultipleSelectField
+            label={label}
+            name={name}
+            noOptionsAvailable={noOptionsAvailable}
+            noOptionsMatchFilter={noOptionsMatchFilter}
+            onChange={this.handleChange}
+            options={options || []}
+            values={value as string[]}
+          />
+        );
+      case TYPE.SINGLE_SELECT:
+        return (
+          <SingleSelectField
+            label={label}
+            name={name}
+            noOptionsAvailable={noOptionsAvailable}
+            noOptionsMatchFilter={noOptionsMatchFilter}
+            onChange={this.handleChange}
+            options={options || []}
+            value={value as string}
+          />
+        );
+    }
+  };
 
-	private handleChange = (field: string, value: string | string[]) => {
-		this.setState({
-			data: {
-				...this.state.data,
-				[field]: value
-			}
-		});
-	};
+  private handleChange = (field: string, value: string | string[]) => {
+    this.setState({
+      data: {
+        ...this.state.data,
+        [field]: value
+      }
+    });
+  };
 
-	private handleApply = () => this.props.onChange(this.state.data);
+  private handleApply = () => this.props.onChange(this.state.data);
 }
 
 interface FormFilterState {
-	data: Dictionary<string | string[]>;
+  data: Dictionary<string | string[]>;
 }
 
 interface FormFilterProps {
-	id?: string;
-	data?: Dictionary<string | string[]>;
-	fields: FilterField[];
-	onCancel: () => void;
-	onChange: (data: Dictionary<string | string[]>) => void;
+  id?: string;
+  data?: Dictionary<string | string[]>;
+  fields: FilterField[];
+  onCancel: () => void;
+  onChange: (data: Dictionary<string | string[]>) => void;
 }
 
 export default FormFilter;

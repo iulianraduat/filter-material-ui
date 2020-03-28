@@ -11,6 +11,7 @@ class SingleSelectField extends React.PureComponent<SingleSelectFieldProps> {
         onChange={this.handleChange}
         options={options}
         SelectProps={{
+          isClearable: true,
           msgNoOptionsAvailable: noOptionsAvailable,
           msgNoOptionsMatchFilter: noOptionsMatchFilter
         }}
@@ -19,10 +20,9 @@ class SingleSelectField extends React.PureComponent<SingleSelectFieldProps> {
     );
   }
 
-  private handleChange = (value: string) => {
+  private handleChange = (value: string | null) => {
     const { name, onChange } = this.props;
-
-    onChange(name, value);
+    onChange(name, value ?? '');
   };
 }
 

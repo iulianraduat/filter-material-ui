@@ -11,10 +11,17 @@ const showSelectedValue = (id: string) => (values: Dictionary) =>
 
 storiesOf('FilterMaterialUi', module)
   .addParameters({ options: { showPanel: false } })
-  .add('an example', () => (
+  .add('not pre-filled', () => (
     <div>
-      <Example onChange={showSelectedValue('f')} />
+      <Example preFilled={false} onChange={showSelectedValue('npf')} />
       <div style={style} />
-      Selected values: <span id="f" />
+      Selected values: <span id="npf" />
+    </div>
+  ))
+  .add('prefilled', () => (
+    <div>
+      <Example preFilled={true} onChange={showSelectedValue('pf')} />
+      <div style={style} />
+      Selected values: <span id="pf" />
     </div>
   ));

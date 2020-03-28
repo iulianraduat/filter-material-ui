@@ -1,4 +1,4 @@
-# filter-material-ui
+# filter-material-ui ![Weekly downloads](https://img.shields.io/npm/dw/filter-material-ui 'Weekly downloads')
 
 A material-ui component which allows to edit a user defined set of fields representing a filter and display it as a text or a form
 
@@ -14,19 +14,19 @@ The component accepts the props defined bellow in the table.
 
 ### Props accepted by FilterMaterialUi
 
-| Name       | Type                       | Required           | Default   | Description                                             |
-|------------|----------------------------|--------------------|-----------|---------------------------------------------------------|
-| id         | string                     | no                 | undefined | The id of the field                                     |
-| fields     | FilterField[]              | yes                | -         | The fields of the filter                                |
-| data       | Dictionary<string \| string[]>          | no        | {}|The initial values for the filter's fields           |
-| onChange   | (data: Dictionary<string \| string[]>) => void | yes       | -|The callback function called when the data is changed |
-| textPrefix | string                     | no                 | ""        | The text displayed before the fields in text mode       |
-| textSuffix | string                     | no                 | ""        | The text displayed after the fields in text mode        |
+| Name       | Type                                           | Required | Default   | Description                                           |
+| ---------- | ---------------------------------------------- | -------- | --------- | ----------------------------------------------------- |
+| id         | string                                         | no       | undefined | The id of the field                                   |
+| fields     | FilterField[]                                  | yes      | -         | The fields of the filter                              |
+| data       | Dictionary<string \| string[]>                 | no       | {}        | The initial values for the filter's fields            |
+| onChange   | (data: Dictionary<string \| string[]>) => void | yes      | -         | The callback function called when the data is changed |
+| textPrefix | string                                         | no       | ""        | The text displayed before the fields in text mode     |
+| textSuffix | string                                         | no       | ""        | The text displayed after the fields in text mode      |
 
 ### Fields defined by FilterField
 
 | Name    | Type     | Required | Default | Description                                             |
-|---------|----------|----------|---------|---------------------------------------------------------|
+| ------- | -------- | -------- | ------- | ------------------------------------------------------- |
 | label   | string   | yes      | -       | The text used as label for the field                    |
 | name    | string   | yes      | -       | The name associated to the field and in the data object |
 | options | string[] | no       | []      | The options used in a select                            |
@@ -36,7 +36,7 @@ The component accepts the props defined bellow in the table.
 ### Fields defined by TEXT
 
 | Name                 | Type   | Required | Description                                                      |
-|----------------------|--------|----------|------------------------------------------------------------------|
+| -------------------- | ------ | -------- | ---------------------------------------------------------------- |
 | all                  | string | yes      | The text displayed when there is no value selected               |
 | noOptionsAvailable   | string | no       | The text when there are no longer options selectable             |
 | noOptionsMatchFilter | string | no       | The text when there are no options matching the filter in select |
@@ -46,7 +46,7 @@ The component accepts the props defined bellow in the table.
 ### Values valid for type
 
 | Enum            | Type of the field                       |
-|-----------------|-----------------------------------------|
+| --------------- | --------------------------------------- |
 | INPUT           | Input                                   |
 | COLORS_SELECT   | Multiple Select with preview for colors |
 | MULTIPLE_SELECT | Multiple Select                         |
@@ -57,7 +57,7 @@ The component accepts the props defined bellow in the table.
 ## Versions
 
 | FilterMaterialUi _uses_ | Material-ui | React  |
-|------------------------:|:-----------:|:------:|
+| ----------------------: | :---------: | :----: |
 |                   1.0.x |    3.2.0    | 16.5.2 |
 |                   1.1.x |    3.6.0    | 16.6.3 |
 |                   1.2.x |    3.9.2    | 16.8.1 |
@@ -66,6 +66,7 @@ The component accepts the props defined bellow in the table.
 |                   2.1.x |    4.2.0    | 16.8.6 |
 |                   2.2.x |    4.3.3    | 16.9.0 |
 |                   2.3.x |    4.9.0    | 16.9.0 |
+|                   2.4.x |    4.9.7    | 16.9.0 |
 
 ### About versioning schema used for FilterMaterialUi
 
@@ -234,3 +235,19 @@ export default App;
 ### 2.2.0
 
 - Updated packages
+
+### 2.3.0
+
+- Updated packages
+
+### 2.3.1
+
+- Updated packages
+
+### 2.4.0
+
+- Updated packages
+- Moved from npm to yarn
+- Made SingleSelect clearable
+- Fixed the crash when there are no options selected in dropdown
+- Made stories for both not pre-filled and pre-filled filters

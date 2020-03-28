@@ -25,7 +25,7 @@ const fields: FilterField[] = [
   },
   {
     label: 'Category',
-    name: 'categories',
+    name: 'category',
     options: ['Open-Source', 'Commercial', 'Educational'],
     text: {
       all: 'ignoring categories',
@@ -47,14 +47,24 @@ const fields: FilterField[] = [
   }
 ];
 
+const preFilledState: ExampleState = {
+  data: {
+    types: ['C#', 'JAVA'],
+    name: 'Green-Field',
+    category: 'Open-Source',
+    colors: ['red', 'yellow']
+  }
+};
+
+const emptyState: ExampleState = {
+  data: {}
+};
+
 class Example extends React.Component<ExampleProps, ExampleState> {
-  public state: ExampleState = {
-    data: {
-      name: 'Green-Field',
-      categories: 'Open-Source',
-      colors: ['red', 'yellow']
-    }
-  };
+  public constructor(props: ExampleProps) {
+    super(props);
+    this.state = props.preFilled ? preFilledState : emptyState;
+  }
 
   public render() {
     return (
@@ -82,6 +92,7 @@ interface ExampleState {
 }
 
 interface ExampleProps {
+  preFilled: boolean;
   onChange: (data: Dictionary) => void;
 }
 

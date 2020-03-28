@@ -2,7 +2,6 @@ import * as React from 'react';
 import { isEmpty } from 'lodash';
 import { MultipleSelect } from 'react-select-material-ui';
 
-
 class MultipleSelectField extends React.Component<MultipleSelectFieldProps> {
   public render() {
     const { label, noOptionsAvailable, noOptionsMatchFilter, options, values } = this.props;
@@ -25,10 +24,10 @@ class MultipleSelectField extends React.Component<MultipleSelectFieldProps> {
     );
   }
 
-  private handleChange = (values: string[]) => {
+  private handleChange = (values: string[] | null) => {
     const { name, onChange } = this.props;
+    values = values ?? [];
     values = values.sort();
-
     onChange(name, values);
   };
 }

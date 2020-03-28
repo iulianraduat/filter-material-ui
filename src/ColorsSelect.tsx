@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ColorsSelect } from 'react-select-material-ui';
 import { isEmpty } from 'lodash';
 
-
 class ColorsSelectField extends React.PureComponent<ColorsSelectFieldProps> {
   public render() {
     const { label, noOptionsAvailable, noOptionsMatchFilter, options, values } = this.props;
@@ -25,10 +24,10 @@ class ColorsSelectField extends React.PureComponent<ColorsSelectFieldProps> {
     );
   }
 
-  private handleChange = (values: string[]) => {
+  private handleChange = (values: string[] | null) => {
     const { name, onChange } = this.props;
+    values = values ?? [];
     values = values.sort();
-
     onChange(name, values);
   };
 }
