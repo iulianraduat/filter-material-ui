@@ -1,6 +1,6 @@
 {
   "name": "filter-material-ui",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "A material-ui component which allows to edit a user defined set of fields representing a filter and display it as a text or a form",
   "main": "lib/index.js",
   "sideEffects": false,
@@ -37,31 +37,31 @@
   },
   "homepage": "https://github.com/iulian-radu-at/filter-material-ui#readme",
   "dependencies": {
-    "@material-ui/core": "^4.9.7",
-    "input-material-ui": "^2.4.0",
+    "@material-ui/core": "^4.10.2",
+    "input-material-ui": "^2.5.0",
     "lodash": "^4.17.15",
-    "react-select-material-ui": "^6.4.2"
+    "react-select-material-ui": "^6.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@storybook/react": "^5.3.17",
+    "@babel/core": "^7.10.2",
+    "@storybook/react": "^5.3.19",
     "@types/babel-core": "^6.25.6",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/lodash": "^4.14.149",
-    "@types/react": "^16.9.26",
-    "@types/react-dom": "^16.9.5",
-    "@types/react-select": "^3.0.11",
+    "@types/lodash": "^4.14.155",
+    "@types/react": "^16.9.36",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-select": "^3.0.13",
     "@types/rimraf": "^3.0.0",
     "babel-core": "^6.26.3",
-    "babel-jest": "^25.2.3",
+    "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "babel-preset-react-app": "^9.1.2",
     "cross-env": "^7.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "rimraf": "^3.0.2",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.5"
   },
   "peerDependencies": {
     "react": "^16.9.0",
