@@ -1,1 +1,6 @@
-export * from "./FilterMaterialUi";
+export {
+  default,
+  TYPE,
+  FilterMaterialUiProps,
+  FilterField,
+} from "./FilterMaterialUi";
