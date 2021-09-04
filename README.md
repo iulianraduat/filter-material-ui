@@ -70,6 +70,7 @@ The component accepts the props defined bellow in the table.
 |                   2.5.x |   4.10.2    |      16.9.0      |
 |                   2.6.x |   4.11.0    |      16.9.0      |
 |                   2.7.x |   4.11.3    | 16.9.0 or 17.0.0 |
+|                   2.8.x |   4.12.3    | 16.9.0 or 17.0.0 |
 
 ### About versioning schema used for FilterMaterialUi
 
@@ -271,3 +272,7 @@ export default App;
 
 - Accepting React 17 as peerDependencies
 - Fixed security warnings
+
+### 2.8.0
+
+- Updated the packages
