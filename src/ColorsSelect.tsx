@@ -1,35 +1,36 @@
-import * as React from 'react';
+import React from 'react';
 import { ColorsSelect } from 'react-select-material-ui';
 import { isEmpty } from 'lodash';
+import { useCallback } from 'react';
 
-class ColorsSelectField extends React.PureComponent<ColorsSelectFieldProps> {
-  public render() {
-    const { label, noOptionsAvailable, noOptionsMatchFilter, options, values } = this.props;
+function ColorsSelectField(props: ColorsSelectFieldProps) {
+  const { label, name, onChange, noOptionsAvailable, noOptionsMatchFilter, options, values } = props;
 
-    if (isEmpty(values) === false) {
-      (values as string[]).sort();
-    }
+  const handleChange = useCallback(
+    (values: string[] | null) => {
+      values = values ?? [];
+      values = values.sort();
+      onChange(name, values);
+    },
+    [name, onChange]
+  );
 
-    return (
-      <ColorsSelect
-        label={label}
-        onChange={this.handleChange}
-        options={options}
-        SelectProps={{
-          msgNoOptionsAvailable: noOptionsAvailable,
-          msgNoOptionsMatchFilter: noOptionsMatchFilter
-        }}
-        defaultValues={values}
-      />
-    );
+  if (isEmpty(values) === false) {
+    (values as string[]).sort();
   }
 
-  private handleChange = (values: string[] | null) => {
-    const { name, onChange } = this.props;
-    values = values ?? [];
-    values = values.sort();
-    onChange(name, values);
-  };
+  return (
+    <ColorsSelect
+      label={label}
+      onChange={handleChange}
+      options={options}
+      SelectProps={{
+        msgNoOptionsAvailable: noOptionsAvailable,
+        msgNoOptionsMatchFilter: noOptionsMatchFilter,
+      }}
+      defaultValues={values}
+    />
+  );
 }
 
 interface ColorsSelectFieldProps {

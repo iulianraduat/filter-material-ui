@@ -1,5 +1,5 @@
+import React, { useCallback, useState } from 'react';
 import FilterMaterialUi, { FilterField, TYPE } from '../src/FilterMaterialUi';
-import React from 'react';
 
 const fields: FilterField[] = [
   {
@@ -9,9 +9,9 @@ const fields: FilterField[] = [
     text: {
       all: 'of any type',
       singular: 'having the type',
-      plural: 'having the types'
+      plural: 'having the types',
     },
-    type: TYPE.MULTIPLE_SELECT
+    type: TYPE.MULTIPLE_SELECT,
   },
   {
     label: 'Name',
@@ -19,9 +19,9 @@ const fields: FilterField[] = [
     text: {
       all: 'having any name',
       singular: 'having names containing',
-      plural: 'having names containing'
+      plural: 'having names containing',
     },
-    type: TYPE.INPUT
+    type: TYPE.INPUT,
   },
   {
     label: 'Category',
@@ -30,9 +30,9 @@ const fields: FilterField[] = [
     text: {
       all: 'ignoring categories',
       singular: 'having the category',
-      plural: 'having the categories'
+      plural: 'having the categories',
     },
-    type: TYPE.SINGLE_SELECT
+    type: TYPE.SINGLE_SELECT,
   },
   {
     label: 'Colors',
@@ -41,54 +41,37 @@ const fields: FilterField[] = [
     text: {
       all: 'ignoring colors',
       singular: 'having the color',
-      plural: 'having the colors'
+      plural: 'having the colors',
     },
-    type: TYPE.COLORS_SELECT
-  }
+    type: TYPE.COLORS_SELECT,
+  },
 ];
 
-const preFilledState: ExampleState = {
-  data: {
-    types: ['C#', 'JAVA'],
-    name: 'Green-Field',
-    category: 'Open-Source',
-    colors: ['red', 'yellow']
-  }
+const preFilledState: Dictionary = {
+  types: ['C#', 'JAVA'],
+  name: 'Green-Field',
+  category: 'Open-Source',
+  colors: ['red', 'yellow'],
 };
 
-const emptyState: ExampleState = {
-  data: {}
-};
+const emptyState: Dictionary = {};
 
-class Example extends React.Component<ExampleProps, ExampleState> {
-  public constructor(props: ExampleProps) {
-    super(props);
-    this.state = props.preFilled ? preFilledState : emptyState;
-  }
+function Example(props: ExampleProps) {
+  const { onChange, preFilled } = props;
 
-  public render() {
-    return (
-      <FilterMaterialUi
-        textPrefix="Display apps "
-        textSuffix="."
-        data={this.state.data}
-        fields={fields}
-        onChange={this.handleChange}
-      />
-    );
-  }
+  const [state, setState] = useState(preFilled ? preFilledState : emptyState);
 
-  private handleChange = (data: Dictionary) => {
-    this.setState({
-      data
-    });
+  const handleChange = useCallback(
+    (data: Dictionary) => {
+      setState(data);
+      onChange(data);
+    },
+    [onChange]
+  );
 
-    this.props.onChange(data);
-  };
-}
-
-interface ExampleState {
-  data: Dictionary;
+  return (
+    <FilterMaterialUi textPrefix="Display apps " textSuffix="." data={state} fields={fields} onChange={handleChange} />
+  );
 }
 
 interface ExampleProps {

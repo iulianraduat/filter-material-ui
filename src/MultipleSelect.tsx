@@ -1,35 +1,35 @@
-import * as React from 'react';
 import { isEmpty } from 'lodash';
+import React, { useCallback } from 'react';
 import { MultipleSelect } from 'react-select-material-ui';
 
-class MultipleSelectField extends React.Component<MultipleSelectFieldProps> {
-  public render() {
-    const { label, noOptionsAvailable, noOptionsMatchFilter, options, values } = this.props;
+function MultipleSelectField(props: MultipleSelectFieldProps) {
+  const { label, name, noOptionsAvailable, noOptionsMatchFilter, onChange, options, values } = props;
 
-    if (isEmpty(values) === false) {
-      (values as string[]).sort();
-    }
+  const handleChange = useCallback(
+    (values: string[] | null) => {
+      values = values ?? [];
+      values = values.sort();
+      onChange(name, values);
+    },
+    [name, onChange]
+  );
 
-    return (
-      <MultipleSelect
-        label={label}
-        onChange={this.handleChange}
-        options={options}
-        SelectProps={{
-          msgNoOptionsAvailable: noOptionsAvailable,
-          msgNoOptionsMatchFilter: noOptionsMatchFilter
-        }}
-        defaultValues={values}
-      />
-    );
+  if (isEmpty(values) === false) {
+    (values as string[]).sort();
   }
 
-  private handleChange = (values: string[] | null) => {
-    const { name, onChange } = this.props;
-    values = values ?? [];
-    values = values.sort();
-    onChange(name, values);
-  };
+  return (
+    <MultipleSelect
+      label={label}
+      onChange={handleChange}
+      options={options}
+      SelectProps={{
+        msgNoOptionsAvailable: noOptionsAvailable,
+        msgNoOptionsMatchFilter: noOptionsMatchFilter,
+      }}
+      defaultValues={values}
+    />
+  );
 }
 
 interface MultipleSelectFieldProps {

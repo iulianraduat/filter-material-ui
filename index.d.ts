@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 export interface FilterMaterialUiProps extends React.Props<FilterMaterialUi> {
   id?: string;
@@ -27,11 +27,11 @@ export enum TYPE {
   INPUT,
   SINGLE_SELECT,
   MULTIPLE_SELECT,
-  COLORS_SELECT
+  COLORS_SELECT,
 }
 
-declare class FilterMaterialUi extends React.Component<FilterMaterialUiProps> {}
+declare type FilterMaterialUi = React.FC<FilterMaterialUiProps>;
 
-declare module "filter-material-ui" {}
+declare module 'filter-material-ui' {}
 
 export default FilterMaterialUi;

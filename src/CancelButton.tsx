@@ -1,14 +1,9 @@
-import * as React from "react";
+import React from 'react';
 
-import Button from "@material-ui/core/Button/Button";
+import { Button } from '@mui/material';
 
 const CancelButton = (props: CancelButtonProps) => (
-  <Button
-    color="secondary"
-    onClick={props.onCancel}
-    style={props.style}
-    variant="outlined"
-  >
+  <Button color="secondary" onClick={props.onCancel} style={props.style} variant="outlined">
     Cancel
   </Button>
 );

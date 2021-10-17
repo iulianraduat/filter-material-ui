@@ -71,6 +71,7 @@ The component accepts the props defined bellow in the table.
 |                   2.6.x |   4.11.0    |      16.9.0      |
 |                   2.7.x |   4.11.3    | 16.9.0 or 17.0.0 |
 |                   2.8.x |   4.12.3    | 16.9.0 or 17.0.0 |
+|                   2.9.x |    5.0.4    | 16.9.0 or 17.0.0 |
 
 ### About versioning schema used for FilterMaterialUi
 
@@ -85,7 +86,7 @@ The component accepts the props defined bellow in the table.
 The base component which allows to create read-only or creatable select components for selecting only one or more values:
 
 ```js
-import * as React from "react";
+import React from "react";
 
 import FilterMaterialUi, { FilterField, TYPE } from "filter-material-ui";
 
@@ -274,5 +275,9 @@ export default App;
 - Fixed security warnings
 
 ### 2.8.0
+
+- Updated the packages
+
+### 2.9.0
 
 - Updated the packages

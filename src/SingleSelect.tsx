@@ -1,29 +1,25 @@
-import * as React from 'react';
+import React from 'react';
+import { useCallback } from 'react';
 import { SingleSelect } from 'react-select-material-ui';
 
-class SingleSelectField extends React.PureComponent<SingleSelectFieldProps> {
-  public render() {
-    const { label, noOptionsAvailable, noOptionsMatchFilter, options, value } = this.props;
+function SingleSelectField(props: SingleSelectFieldProps) {
+  const { label, name, noOptionsAvailable, noOptionsMatchFilter, onChange, options, value } = props;
 
-    return (
-      <SingleSelect
-        label={label}
-        onChange={this.handleChange}
-        options={options}
-        SelectProps={{
-          isClearable: true,
-          msgNoOptionsAvailable: noOptionsAvailable,
-          msgNoOptionsMatchFilter: noOptionsMatchFilter
-        }}
-        defaultValue={value}
-      />
-    );
-  }
+  const handleChange = useCallback((value: string | null) => onChange(name, value ?? ''), [name, onChange]);
 
-  private handleChange = (value: string | null) => {
-    const { name, onChange } = this.props;
-    onChange(name, value ?? '');
-  };
+  return (
+    <SingleSelect
+      label={label}
+      onChange={handleChange}
+      options={options}
+      SelectProps={{
+        isClearable: true,
+        msgNoOptionsAvailable: noOptionsAvailable,
+        msgNoOptionsMatchFilter: noOptionsMatchFilter,
+      }}
+      defaultValue={value}
+    />
+  );
 }
 
 interface SingleSelectFieldProps {

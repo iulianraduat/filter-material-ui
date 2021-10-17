@@ -1,18 +1,13 @@
-import * as React from 'react';
-
 import InputMaterialUi from 'input-material-ui';
+import React from 'react';
+import { useCallback } from 'react';
 
-class InputField extends React.PureComponent<InputFieldProps> {
-  public render() {
-    const { label, value } = this.props;
+function InputField(props: InputFieldProps) {
+  const { label, name, onChange, value } = props;
 
-    return <InputMaterialUi label={label} onChange={this.handleChange} value={value} />;
-  }
+  const handleChange = useCallback((value: string) => onChange(name, value), [name, onChange]);
 
-  private handleChange = (value: string) => {
-    const { name, onChange } = this.props;
-    onChange(name, value);
-  };
+  return <InputMaterialUi label={label} onChange={handleChange} value={value} />;
 }
 
 interface InputFieldProps {

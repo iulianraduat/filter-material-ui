@@ -1,175 +1,166 @@
-import * as React from 'react';
-
-import Grid, { GridSize } from '@material-ui/core/Grid/Grid';
-import { Dictionary, map, size } from 'lodash';
-
+import { Grid, GridSize } from '@mui/material';
+import { Dictionary, size } from 'lodash';
+import React, { useCallback, useMemo, useState } from 'react';
+import ApplyButton from './ApplyButton';
+import CancelButton from './CancelButton';
+import ColorsSelectField from './ColorsSelect';
 import { FilterField, TYPE } from './FilterMaterialUi';
 import InputField from './InputField';
-import SingleSelectField from './SingleSelect';
 import MultipleSelectField from './MultipleSelect';
-import ColorsSelectField from './ColorsSelect';
-import CancelButton from './CancelButton';
-import ApplyButton from './ApplyButton';
+import SingleSelectField from './SingleSelect';
 
 const styles: Dictionary<React.CSSProperties> = {
   button: {
-    margin: 10
+    margin: 10,
   },
   buttons: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   container: {
-    width: '100%'
+    width: '100%',
   },
   grid: {
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   item: {
-    padding: 10
-  }
+    padding: 10,
+  },
 };
 
-class FormFilter extends React.PureComponent<FormFilterProps, FormFilterState> {
-  constructor(props: FormFilterProps) {
-    super(props);
+function FormFilter(props: FormFilterProps) {
+  const { fields, id, onCancel, onChange } = props;
 
-    this.state = {
-      data: props.data || {}
-    };
-  }
+  const [data, setData] = useState(props.data || {});
 
-  public render() {
-    return (
-      <div style={styles.container}>
-        <Grid container={true} style={styles.grid}>
-          {this.renderFields()}
-        </Grid>
-        <div style={styles.buttons}>
-          <CancelButton onCancel={this.props.onCancel} style={styles.button} />
-          <ApplyButton onApply={this.handleApply} style={styles.button} />
-        </div>
-      </div>
-    );
-  }
+  const handleChange = useCallback(
+    (field: string, value: string | string[]) =>
+      setData((prevData) => ({
+        ...prevData,
+        [field]: value,
+      })),
+    []
+  );
 
-  private renderFields = () => map(this.props.fields, this.renderField);
+  const renderFieldByType = useCallback(
+    (field: FilterField) => {
+      const { label, name, options, text } = field;
+      const { noOptionsAvailable, noOptionsMatchFilter } = text;
+      const value: string | string[] | undefined = data[name];
 
-  private renderField = (field: FilterField) => {
-    const { md, sm, xs } = this.getColWidth();
-
-    return (
-      <Grid
-        item={true}
-        key={field.name}
-        md={md as GridSize}
-        sm={sm as GridSize}
-        style={styles.item}
-        xs={xs as GridSize}
-      >
-        {this.renderFieldByType(field)}
-      </Grid>
-    );
-  };
-
-  private getColWidth = () => {
-    const numFields: number = size(this.props.fields);
-
-    switch (numFields) {
-      case 1:
-        return {
-          md: 12,
-          sm: 12,
-          xs: 12
-        };
-      case 2:
-        return {
-          md: 6,
-          sm: 6,
-          xs: 12
-        };
-      case 3:
-        return {
-          md: 4,
-          sm: 6,
-          xs: 12
-        };
-      default:
-        return {
-          md: 3,
-          sm: 6,
-          xs: 12
-        };
-    }
-  };
-
-  private renderFieldByType = (field: FilterField) => {
-    const { label, name, options, text } = field;
-    const { noOptionsAvailable, noOptionsMatchFilter } = text;
-    const { data } = this.state;
-    const value: string | string[] | undefined = data[name];
-
-    switch (field.type) {
-      case TYPE.INPUT:
-        return <InputField label={label} name={name} onChange={this.handleChange} value={value as string} />;
-      case TYPE.COLORS_SELECT:
-        return (
-          <ColorsSelectField
-            label={label}
-            name={name}
-            noOptionsAvailable={noOptionsAvailable}
-            noOptionsMatchFilter={noOptionsMatchFilter}
-            onChange={this.handleChange}
-            options={options || []}
-            values={value as string[]}
-          />
-        );
-      case TYPE.MULTIPLE_SELECT:
-        return (
-          <MultipleSelectField
-            label={label}
-            name={name}
-            noOptionsAvailable={noOptionsAvailable}
-            noOptionsMatchFilter={noOptionsMatchFilter}
-            onChange={this.handleChange}
-            options={options || []}
-            values={value as string[]}
-          />
-        );
-      case TYPE.SINGLE_SELECT:
-        return (
-          <SingleSelectField
-            label={label}
-            name={name}
-            noOptionsAvailable={noOptionsAvailable}
-            noOptionsMatchFilter={noOptionsMatchFilter}
-            onChange={this.handleChange}
-            options={options || []}
-            value={value as string}
-          />
-        );
-    }
-  };
-
-  private handleChange = (field: string, value: string | string[]) => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        [field]: value
+      switch (field.type) {
+        case TYPE.INPUT:
+          return <InputField label={label} name={name} onChange={handleChange} value={value as string} />;
+        case TYPE.COLORS_SELECT:
+          return (
+            <ColorsSelectField
+              label={label}
+              name={name}
+              noOptionsAvailable={noOptionsAvailable}
+              noOptionsMatchFilter={noOptionsMatchFilter}
+              onChange={handleChange}
+              options={options || []}
+              values={value as string[]}
+            />
+          );
+        case TYPE.MULTIPLE_SELECT:
+          return (
+            <MultipleSelectField
+              label={label}
+              name={name}
+              noOptionsAvailable={noOptionsAvailable}
+              noOptionsMatchFilter={noOptionsMatchFilter}
+              onChange={handleChange}
+              options={options || []}
+              values={value as string[]}
+            />
+          );
+        case TYPE.SINGLE_SELECT:
+          return (
+            <SingleSelectField
+              label={label}
+              name={name}
+              noOptionsAvailable={noOptionsAvailable}
+              noOptionsMatchFilter={noOptionsMatchFilter}
+              onChange={handleChange}
+              options={options || []}
+              value={value as string}
+            />
+          );
+        default:
+          return <div>{field.type}</div>;
       }
-    });
-  };
+    },
+    [data]
+  );
 
-  private handleApply = () => this.props.onChange(this.state.data);
+  const renderField = useCallback(
+    (field: FilterField) => {
+      const { md, sm, xs } = getColWidth(size(fields));
+      return (
+        <Grid
+          item={true}
+          key={field.name}
+          md={md as GridSize}
+          sm={sm as GridSize}
+          style={styles.item}
+          xs={xs as GridSize}
+        >
+          {renderFieldByType(field)}
+        </Grid>
+      );
+    },
+    [fields]
+  );
+  const renderedFields = useMemo(() => fields.map(renderField), [fields]);
+
+  const handleApply = useCallback(() => onChange(data), [data]);
+
+  return (
+    <div id={id} style={styles.container}>
+      <Grid container={true} style={styles.grid}>
+        {renderedFields}
+      </Grid>
+      <div style={styles.buttons}>
+        <CancelButton onCancel={onCancel} style={styles.button} />
+        <ApplyButton onApply={handleApply} style={styles.button} />
+      </div>
+    </div>
+  );
 }
 
-interface FormFilterState {
-  data: Dictionary<string | string[]>;
+function getColWidth(numFields: number) {
+  switch (numFields) {
+    case 1:
+      return {
+        md: 12,
+        sm: 12,
+        xs: 12,
+      };
+    case 2:
+      return {
+        md: 6,
+        sm: 6,
+        xs: 12,
+      };
+    case 3:
+      return {
+        md: 4,
+        sm: 6,
+        xs: 12,
+      };
+    default:
+      return {
+        md: 3,
+        sm: 6,
+        xs: 12,
+      };
+  }
 }
 
 interface FormFilterProps {
-  id?: string;
   data?: Dictionary<string | string[]>;
   fields: FilterField[];
+  id?: string;
   onCancel: () => void;
   onChange: (data: Dictionary<string | string[]>) => void;
 }
