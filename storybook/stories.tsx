@@ -10,7 +10,11 @@ const style: React.CSSProperties = {
 };
 
 const showSelectedValue = (id: string) => (values: Dictionary) =>
-  (document.getElementById(id).textContent = JSON.stringify(values, undefined, 2));
+  (document.getElementById(id)!.textContent = JSON.stringify(
+    values,
+    undefined,
+    2
+  ));
 
 export const NotPreFilled = () => (
   <div>

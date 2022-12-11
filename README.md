@@ -72,6 +72,7 @@ The component accepts the props defined bellow in the table.
 |                   2.7.x |   4.11.3    | 16.9.0 or 17.0.0 |
 |                   2.8.x |   4.12.3    | 16.9.0 or 17.0.0 |
 |                   2.9.x |    5.0.4    | 16.9.0 or 17.0.0 |
+|                   3.0.x |   5.10.17   |     >=18.0.0     |
 
 ### About versioning schema used for FilterMaterialUi
 
@@ -281,3 +282,8 @@ export default App;
 ### 2.9.0
 
 - Updated the packages
+
+### 3.0.0
+
+- Migrated to material-ui 5
+- Supports minimum React 18

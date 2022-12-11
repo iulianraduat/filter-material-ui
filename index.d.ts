@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface FilterMaterialUiProps extends React.Props<FilterMaterialUi> {
+export interface FilterMaterialUiProps {
   id?: string;
   fields: FilterField[];
   data?: { [key: string]: string | string[] };
