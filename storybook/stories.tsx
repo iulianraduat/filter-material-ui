@@ -1,9 +1,14 @@
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
+import FilterMaterialUi from '../src/FilterMaterialUi';
 import Example, { Dictionary } from './Example';
 
-export default {
+const meta: Meta<typeof FilterMaterialUi> = {
   title: 'FilterMaterialUi',
-};
+  component: FilterMaterialUi,
+} as Meta<typeof FilterMaterialUi>;
+export default meta;
+type Story = StoryObj<typeof FilterMaterialUi>;
 
 const style: React.CSSProperties = {
   height: 20,
